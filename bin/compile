@@ -173,6 +173,11 @@ run_npm "install --production"
 run_npm "rebuild"
 echo "Dependencies installed" | indent
 
+# compile Coffeescript sources
+echo "-----> Compiling coffee source"
+$VENDORED_NODE/bin/node $VENDORED_NPM/cli.js/coffee --compile --bare --output $BUILD_DIR/target/ $BUILD_DIR/src/
+echo "Source compiled to target" | indent
+
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\"" > $BUILD_DIR/.profile.d/nodejs.sh
