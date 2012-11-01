@@ -1,5 +1,3 @@
-## v7 (2012-03-27)
+## v1 (2012-11-01)
 
-* remove build asset caching
-* prevent installation of devDependencies
-* add warning if no nodejs version specified
+* first release
