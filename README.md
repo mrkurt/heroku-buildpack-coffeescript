@@ -1,8 +1,7 @@
-Heroku buildpack: Node.js
-=========================
+Heroku buildpack: Coffeescript
+==============================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Node.js apps.
-It uses [NPM](http://npmjs.org/) and [SCons](http://www.scons.org/).
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Coffeescript apps. It uses [NPM](http://npmjs.org/) and [SCons](http://www.scons.org/). It is based on the [Heroku node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs).
 
 Usage
 -----
@@ -10,24 +9,33 @@ Usage
 Example usage:
 
     $ ls
-    Procfile  package.json  web.js
+    Procfile  package.json  src
 
-    $ heroku create --stack cedar --buildpack http://github.com/heroku/heroku-buildpack-nodejs.git
+    $ ls src
+    app.coffee
+
+    $ heroku create --stack cedar --buildpack https://github.com/aergonaut/heroku-buildpack-coffeescript.git
 
     $ git push heroku master
     ...
     -----> Heroku receiving push
     -----> Fetching custom buildpack
-    -----> Node.js app detected
+    -----> Coffeescript app detected
     -----> Vendoring node 0.4.7
     -----> Installing dependencies with npm 1.0.8
+           coffee-script@1.3.3 ./node_modules/coffee-script
+
            express@2.1.0 ./node_modules/express
            ├── mime@1.2.2
            ├── qs@0.3.1
            └── connect@1.6.2
            Dependencies installed
+    -----> Compiling coffee source
+           Compiled to target directory
 
-The buildpack will detect your app as Node.js if it has the file `package.json` in the root.  It will use NPM to install your dependencies, and vendors a version of the Node.js runtime into your slug.  The `node_modules` directory will be cached between builds to allow for faster NPM install time.
+The buildpack will detect your app as Coffeescript if it detects a file matching `src/*.coffee` in your project root.  It will use NPM to install your dependencies, and vendors a version of the Node.js runtime into your slug.  The `node_modules` directory will be cached between builds to allow for faster NPM install time.
+
+You must include Coffeescript in your `package.json`; the buildpack does not install Coffeescript automatically in order to allow you to specify your own Coffeescript version.
 
 Node.js and npm versions
 ------------------------
@@ -45,7 +53,7 @@ You can specify the versions of Node.js and npm your application requires using 
 
 To list the available versions of Node.js and npm, see these manifests:
 
-http://heroku-buildpack-nodejs.s3.amazonaws.com/manifest.nodejs
+http://heroku-buildpack-nodejs.s3.amazonaws.com/manifest.nodejs  
 http://heroku-buildpack-nodejs.s3.amazonaws.com/manifest.npm
 
 Hacking
