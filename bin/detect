@@ -2,8 +2,8 @@
 # bin/detect <build-dir>
 
 detect_coffee() {
-	local ctxDir=$1
-	test -d $ctxDir/src && test -n "$(find $ctxDir/src -maxdepth 1 -name '*.coffee' -print -quit)"
+  local ctxDir=$1
+  test -d $ctxDir/src && test -n "$(find $ctxDir/src -maxdepth 1 -name '*.coffee' -print -quit)"
 }
 
 if detect_coffee $1 ; then
