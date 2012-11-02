@@ -19,19 +19,32 @@ Example usage:
     $ git push heroku master
     ...
     -----> Heroku receiving push
-    -----> Fetching custom buildpack
+    -----> Fetching custom git buildpack... done
     -----> Coffeescript app detected
-    -----> Vendoring node 0.4.7
-    -----> Installing dependencies with npm 1.0.8
-           coffee-script@1.3.3 ./node_modules/coffee-script
+    -----> Resolving engine versions
+           Using Node.js version: 0.8.12
+           Using npm version: 1.1.49
+    -----> Fetching Node.js binaries
+    -----> Vendoring node into slug
+    -----> Installing dependencies with npm
+           coffee-script@1.4.0 node_modules/coffee-script
 
-           express@2.1.0 ./node_modules/express
-           ├── mime@1.2.2
-           ├── qs@0.3.1
-           └── connect@1.6.2
+           express@3.0.0 node_modules/express
+           ├── methods@0.0.1
+           ├── fresh@0.1.0
+           ├── range-parser@0.0.4
+           ├── cookie@0.0.4
+           ├── crc@0.2.0
+           ├── commander@0.6.1
+           ├── debug@0.7.0
+           ├── mkdirp@0.3.3
+           ├── send@0.1.0 (mime@1.2.6)
+           └── connect@2.6.0 (pause@0.0.1, bytes@0.1.0, qs@0.5.1, formidable@1.0.11, send@0.0.4)
            Dependencies installed
     -----> Compiling coffee source
-           Compiled to target directory
+           Source compiled to target
+    -----> Building runtime environment
+    ...
 
 The buildpack will detect your app as Coffeescript if it detects a file matching `src/*.coffee` in your project root.  It will use NPM to install your dependencies, and vendors a version of the Node.js runtime into your slug.  The `node_modules` directory will be cached between builds to allow for faster NPM install time.
 
